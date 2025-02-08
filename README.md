@@ -7,22 +7,40 @@ This kernel is tuned for these SDM685 (`sm6225-AD`) devices:
 - Xiaomi Redmi Note _13_ 4G (`sapphire` / `sapphiren`)
 
 # 🏗️ Notes (for developers):
-### **Cloning this source:**
-1. *This repo has kernelSU as a git submodule*. This means it has to be cloned with `--recurse-submodules`
-2. Since this is default branch, use the `-b` switch to clone a different one (eg. `android13-5.15-lts`)
-3. You can use the `--depth=1` argument to make a lighter shallow clone (not recommended)
+### **Cloning this source (for beginners)**:
+- There are custom repo manifest files in this [branch root directory](https://github.com/chickendrop89/device_xiaomi_unified-kernel/tree/readme), Download one, and move it into some directory.
+- After that, (expecting the manifest is in the current directory) execute these commands
+```shell
+repo init -u https://android.googlesource.com/kernel/manifest -m $(pwd)/<chickernel variant>.xml
+repo sync --fetch-submodules
+```
+
+### **Building this source**:
+- You can either use `bazel` or `build.sh` to build a GKI kernel. I personally hate bazel.
+
+```shell
+BUILD_CONFIG=common/<build config>
+FAST_BUILD=1 # Not required, forces thinLTO
+
+build/config.sh nconfig # Edit build configuration
+build/build.sh # Build the kernel
+```
+- After building, the artifacts are at `out/dist`
+
 
 ### **This kernel is built with these configurations:**
 - `build.config.gki.aarch64.chickernel`
 - `build.config.gki.aarch64.chickernel.ksu`
-- `build.config.gki.aarch64.chickernel.ksu.susfs` **(SuSFS branch)**
-
-This kernel is built with a newer toolchain as defined in `build.config.constants`
-- Ensure you have the correct prebuilt downloaded from [this site](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/heads/main)
+- `build.config.gki.aarch64.chickernel.ksu.susfs` **(On the SuSFS branch)**
 
 ### **Upstreaming kernelSU:**
-- Change directory to your source directory and run:
+- This is dependent on how you cloned this repository!
+- Example: change directory to your source, and run:
 ```shell
+# If managed by repo
+repo sync --fetch-submodules
+
+# If managed by git
 git submodule update --init --remote
 ```
 
