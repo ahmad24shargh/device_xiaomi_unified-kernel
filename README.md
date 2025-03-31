@@ -30,8 +30,8 @@ build/build.sh # Build the kernel
 
 ### **This kernel is built with these configurations:**
 - `build.config.gki.aarch64.chickernel`
-- `build.config.gki.aarch64.chickernel.ksu`
-- `build.config.gki.aarch64.chickernel.ksu.susfs` **(On the SuSFS branch)**
+- `build.config.gki.aarch64.chickernel.ksun`
+- `build.config.gki.aarch64.chickernel.ksun.susfs` **(On the SuSFS branch)**
 
 ### **Upstreaming kernelSU:**
 - This is dependent on how you cloned this repository!
