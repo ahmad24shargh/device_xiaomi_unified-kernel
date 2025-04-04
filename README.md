@@ -33,7 +33,7 @@ build/build.sh # Build the kernel
 ### **This kernel is built with these configurations:**
 - `build.config.gki.aarch64.chickernel`
 - `build.config.gki.aarch64.chickernel.ksun`
-- `build.config.gki.aarch64.chickernel.ksun.susfs` **(On the SuSFS branch)**
+- `build.config.gki.aarch64.chickernel.ksun.susfs`
 
 ### **Upstreaming the source:**
 - Example: upstream the kernel to latest ACK LTS
@@ -66,3 +66,6 @@ I do it someway like this:
 2. I merge the directories from `kernel_patches/` to my tree
 3. I apply the patch: `git apply *.patch --reject --whitespace=fix`
 4. I commit, and push to origin
+
+### **A note about the deleted SuSFS branch**
+- SuSFS was merged into the main branch for the sake of simplicity and my sanity
