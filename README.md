@@ -36,6 +36,11 @@ build/build.sh # Build the kernel
 - `build.config.gki.aarch64.chickernel.ksun`
 - `build.config.gki.aarch64.chickernel.ksun.susfs`
 
+### **Building using CI/CD (Actions)**
+- GitHub actions can be used to automatically build the kernel with all of it's configurations
+- It requires a custom `manifest.xml` (with a change to the `common-repo` to your fork's URL) and other stuff
+- https://github.com/chickendrop89/gki-build-workflow
+
 ### **Upstreaming the source:**
 - Example: upstreaming the kernel to latest ACK LTS
 ```shell
