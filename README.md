@@ -19,34 +19,64 @@ repo sync --fetch-submodules
 ```
 
 ### **Building this source**:
+- You can either use `bazel`, `build.sh (deprecated)` or `CI/CD` to build this kernel.
 - https://source.android.com/docs/setup/build/building-kernels#building
-- You can either use `bazel` or `build.sh (deprecated)` to build a GKI kernel. I personally hate bazel.
 
-```shell
-BUILD_CONFIG=common/<build config>
-FAST_BUILD=1 # Not required, forces thinLTO
+<details>
+  <summary><b>💚 Building using bazel</b></summary>
 
-build/config.sh nconfig # Edit build configuration
-build/build.sh # Build the kernel
-```
-- After building, the artifacts can be found at `out/dist`
+  ### **Building using bazel**
 
-### **This kernel is built with these configurations:**
-- `build.config.gki.aarch64.chickernel`
-- `build.config.gki.aarch64.chickernel.ksun`
-- `build.config.gki.aarch64.chickernel.ksun.susfs`
+  ```shell
+  # --config=fast speeds up the build
+  bazel build //common:<build config>
+  ```
+  - After building, the artifacts can be found somewhere at `bazel-out`
+  
+  ### **Bazel accepts these configurations:**
+  - `chickernel`
+  - `chickernel_ksun`
+  - `chickernel_ksun_susfs`
 
-### **Building using CI/CD (Actions)**
-- GitHub actions can be used to automatically build the kernel with all of it's configurations
-- It requires a custom `manifest.xml` (with a change to the `common-repo` to your fork's URL) and other stuff
-- https://github.com/chickendrop89/gki-build-workflow
+</details>
+<details>
+  <summary><b>📜 Building using build script</b></summary>
+
+  ### **Building using build script**
+
+  ```shell
+  BUILD_CONFIG=common/<build config>
+  FAST_BUILD=1 # Not required, forces thinLTO
+  
+  build/config.sh nconfig # Edit build configuration
+  build/build.sh # Build the kernel
+  ``` 
+  - After building, the artifacts can be found at `out/dist/android13-5.15`
+  
+  ### **Build script accepts these configurations:**
+  - `build.config.gki.aarch64.chickernel`
+  - `build.config.gki.aarch64.chickernel.ksun`
+  - `build.config.gki.aarch64.chickernel.ksun.susfs`
+
+</details>
+<details>
+  <summary><b>🖥️ Building using CI/CD</b></summary>
+
+  ### **Building using CI/CD (Actions)**
+  - GitHub actions can be used to automatically build the kernel with all of it's configurations
+  - It requires a custom `manifest.xml` (with a change to the `common-repo` to your fork's URL) and other stuff
+  - https://github.com/chickendrop89/gki-build-workflow
+
+</details>
+
+------
 
 ### **Upstreaming the source:**
 - Example: upstreaming the kernel to latest ACK LTS
 ```shell
 git remote add ack https://android.googlesource.com/kernel/common
 git fetch ack android13-5.15-lts
-git merge android13-5.15-lts
+git merge ack/android13-5.15-lts
 
 # Then fix merge conflicts if any
 ```
@@ -71,6 +101,3 @@ I do it someway like this:
 1. First, [i revert previous implementation commit](https://github.com/chickendrop89/device_xiaomi_unified-kernel/commit/07f7d604fb4695e0735f0ab3e88e6ed57a90adf3)
 2. I merge the directories from `kernel_patches/` to my tree
 3. I apply the patch: `git apply *.patch --reject --whitespace=fix`
-
-### **A note about the deleted SuSFS branch**
-- SuSFS was merged into the main branch for the sake of simplicity and my sanity
