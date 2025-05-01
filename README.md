@@ -64,8 +64,8 @@ repo sync --fetch-submodules
 
   ### **Building using CI/CD (Actions)**
   - GitHub actions can be used to automatically build the kernel with all of it's configurations
-  - It requires a custom `manifest.xml` (with a change to the `common-repo` to your fork's URL) and other stuff
-  - https://github.com/chickendrop89/gki-build-workflow
+  - Please star this repo, if you find it interesting!
+  - [chickendrop89/ack-build-workflow](https://github.com/chickendrop89/ack-build-workflow)
 
 </details>
 
