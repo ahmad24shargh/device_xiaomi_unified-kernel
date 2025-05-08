@@ -8,6 +8,10 @@ This kernel is tuned for these SDM685 (`sm6225-AD`) devices with `4/6GB` RAM:
 - Xiaomi Redmi Note _12_ 4G (`topaz` / `tapas`)
 - Xiaomi Redmi Note _13_ 4G (`sapphire` / `sapphiren`)
 
+If your device is not on the list and has a compatible KMI,                
+it is not recommended nor supported as the kernel is stripped down
+to support this specific `SoC` and `OEM`.
+
 # ⛔ Report Issues
 Please [report issues here](https://github.com/chickendrop89/device_xiaomi_unified-recovery/issues), or to [my telegram](https://t.me/chickendrop89)
 
