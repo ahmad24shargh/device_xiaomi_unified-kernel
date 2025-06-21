@@ -2159,6 +2159,7 @@ __maybe_unused static bool should_filter_vendor_message(const char *text)
         #endif
             "st21n", /* st21nfc  */
             "[Awin", /* [Awinic] */
+			"qpnp_"  /* qpnp_vib_brightness_set */
             NULL
     };
 
