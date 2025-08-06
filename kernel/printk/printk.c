@@ -2160,7 +2160,10 @@ __maybe_unused static bool should_filter_vendor_message(const char *text)
             "st21n", /* st21nfc  */
             "[Awin", /* [Awinic] */
 			"qpnp_", /* qpnp_vib_brightness_set */
-            NULL
+			"(virq", /* (virq:irq_count) */ 
+            "(ipi:", /* (ipi:irq_count) */
+			"(cpu:", /* (cpu:irq_count) */
+			NULL
     };
 
     for (module = filtered_modules; likely(*module); module++) {
