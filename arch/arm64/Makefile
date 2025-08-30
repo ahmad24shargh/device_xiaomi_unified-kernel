@@ -95,7 +95,7 @@ endif
 
 ifeq ($(CONFIG_ARCH_KHAJE),y)
 KHAJE_FLAGS := -march=armv8.2-a+crc+lse
-KHAJE_FLAGS += -mtune=kryo
+KHAJE_FLAGS += $(call cc-option,-mtune=kryo)
 
 KBUILD_AFLAGS  += $(KHAJE_FLAGS)
 KBUILD_CFLAGS  += $(KHAJE_FLAGS) \
