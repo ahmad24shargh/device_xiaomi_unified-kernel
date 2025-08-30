@@ -44,13 +44,6 @@ KBUILD_AFLAGS	+= $(compat_vdso)
 KBUILD_CFLAGS	+= $(call cc-option,-mabi=lp64)
 KBUILD_AFLAGS	+= $(call cc-option,-mabi=lp64)
 
-# Optimize for SM6225-AD
-KBUILD_CFLAGS += $(call cc-option,-mcpu=cortex-a73.cortex-a53)
-KBUILD_CFLAGS += $(call cc-option,-mtune=kryo)
-
-KBUILD_AFLAGS += $(call cc-option,-mcpu=cortex-a73.cortex-a53)
-KBUILD_AFLAGS += $(call cc-option,-mtune=kryo)
-
 # Avoid generating .eh_frame* sections.
 KBUILD_CFLAGS	+= -fno-asynchronous-unwind-tables -fno-unwind-tables
 KBUILD_AFLAGS	+= -fno-asynchronous-unwind-tables -fno-unwind-tables
@@ -100,9 +93,18 @@ ifeq ($(CONFIG_AS_HAS_ARMV8_5), y)
 asm-arch := armv8.5-a
 endif
 
+ifeq ($(CONFIG_ARCH_KHAJE),y)
+KHAJE_FLAGS := -march=armv8.2-a+crc+lse
+KHAJE_FLAGS += -mtune=kryo
+
+KBUILD_AFLAGS  += $(KHAJE_FLAGS)
+KBUILD_CFLAGS  += $(KHAJE_FLAGS) \
+	-DARM64_ASM_ARCH='"armv8.2-a"'
+else
 ifdef asm-arch
-KBUILD_CFLAGS	+= -Wa,-march=$(asm-arch) \
-		   -DARM64_ASM_ARCH='"$(asm-arch)"'
+KBUILD_CFLAGS  += -Wa,-march=$(asm-arch) \
+	-DARM64_ASM_ARCH='"$(asm-arch)"'
+endif
 endif
 
 ifeq ($(CONFIG_SHADOW_CALL_STACK), y)
