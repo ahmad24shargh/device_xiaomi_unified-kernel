@@ -94,7 +94,7 @@ asm-arch := armv8.5-a
 endif
 
 ifeq ($(CONFIG_ARCH_KHAJE),y)
-KHAJE_FLAGS := -march=armv8.2-a+crc+lse
+KHAJE_FLAGS := -march=armv8.2-a+crc+sha2+aes
 KHAJE_FLAGS += $(call cc-option,-mtune=kryo)
 
 KBUILD_AFLAGS  += $(KHAJE_FLAGS)
