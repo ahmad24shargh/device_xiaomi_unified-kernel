@@ -42,3 +42,4 @@ obj-$(CONFIG_FIELDBUS_DEV)     += fieldbus/
 obj-$(CONFIG_QLGE)		+= qlge/
 obj-$(CONFIG_WFX)		+= wfx/
 obj-$(CONFIG_BINDER_PRIO)	+= binder_prio/
+obj-$(CONFIG_KSHRINK_SLABD) += kshrink_slabd/
