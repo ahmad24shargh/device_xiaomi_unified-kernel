@@ -1185,27 +1185,23 @@ static bool msm_gpio_needs_dual_edge_parent_workaround(struct irq_data *d,
 	       test_bit(d->hwirq, pctrl->skip_wake_irqs);
 }
 
-static void msm_dirconn_cfg_reg(struct irq_data *d, u32 offset)
+static void msm_gpio_irq_init_valid_mask(struct gpio_chip *gc,
+					 unsigned long *valid_mask,
+					 unsigned int ngpios)
 {
-	u32 val;
-	const struct msm_pingroup *g;
-	unsigned long flags;
-	struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
 	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	const struct msm_pingroup *g;
+	int i;
 
-	raw_spin_lock_irqsave(&pctrl->lock, flags);
-	g = &pctrl->soc->groups[d->hwirq];
+	bitmap_fill(valid_mask, ngpios);
 
-	val = (d->hwirq) & 0xFF;
+	for (i = 0; i < ngpios; i++) {
+		g = &pctrl->soc->groups[i];
 
-	writel_relaxed(val, pctrl->regs[g->tile] + g->dir_conn_reg
-					+ (offset * 4));
-
-	val = msm_readl_intr_cfg(pctrl, g);
-	val |= BIT(g->dir_conn_en_bit);
-
-	msm_writel_intr_cfg(val, pctrl, g);
-	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+		if (g->intr_detection_width != 1 &&
+		    g->intr_detection_width != 2)
+			clear_bit(i, valid_mask);
+	}
 }
 
 static int msm_gpio_irq_set_type(struct irq_data *d, unsigned int type)
@@ -1639,6 +1635,7 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 	girq->default_type = IRQ_TYPE_NONE;
 	girq->handler = handle_bad_irq;
 	girq->parents[0] = pctrl->irq;
+	girq->init_valid_mask = msm_gpio_irq_init_valid_mask;
 
 	ret = gpiochip_add_data(&pctrl->chip, pctrl);
 	if (ret) {
