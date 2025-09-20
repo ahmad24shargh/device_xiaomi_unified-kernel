@@ -821,6 +821,9 @@ KBUILD_CFLAGS	+= -mllvm -polly-loopfusion-greedy=1 \
 		   -mllvm -polly-omp-backend=LLVM \
 		   -mllvm -polly-scheduling=dynamic \
 		   -mllvm -polly-scheduling-chunksize=1
+
+KBUILD_CFLAGS 	+= -mllvm -regalloc-enable-advisor=release \
+		  -mllvm -hot-cold-split=true
 else
 KBUILD_CFLAGS	+= -mllvm -polly-opt-fusion=max
 endif
@@ -1041,6 +1044,9 @@ endif
 
 # Limit inlining across translation units to reduce binary size
 KBUILD_LDFLAGS += -mllvm -import-instr-limit=5
+
+# Enable MLGO for register allocation.
+KBUILD_LDFLAGS += -mllvm -regalloc-enable-advisor=release
 
 # Check for frame size exceeding threshold during prolog/epilog insertion
 # when using lld < 13.0.0.
