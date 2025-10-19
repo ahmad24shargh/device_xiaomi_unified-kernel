@@ -164,3 +164,7 @@ arch/*/configs/vendor/*_defconfig
 
 # Documentation toolchain
 sphinx_*/
+
+# Backup files
+*.orig
+*.bak
