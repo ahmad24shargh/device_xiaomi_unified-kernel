@@ -3,3 +3,7 @@
 	url = https://github.com/chickendrop89/KernelSU-Next
     branch = next-susfs
     shallow = true
+[submodule "BBG"]
+	path = Baseband-guard
+	url = https://github.com/vc-teahouse/Baseband-guard
+    shallow = true
