@@ -21,9 +21,11 @@ For building, upstreaming `KSU-Next`/`SuSFS`, automated builds using actions, [v
 # 🏗️ Kernel quirks
 For any other kernel developers out there. 
 
-Here are some highlights of device-specific issues that come from `ACK` that i have found a fix to on this kernel:
+Here are some highlights of device-specific issues that i have found a fix to on this kernel:
 
 - Fixed fuel gauge (`sm5602`) and USB (`dwc3-msm-core`) not working after merging `5.15.149` 
   - [2b14b93963328af3fb023c02c9c8a705a71eb8a7](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/2b14b93963328af3fb023c02c9c8a705a71eb8a7)
 - Fixed kernel panicking on USB tethering
   - [082c1c5974a03663cf955459aef88da8789b2238](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/082c1c5974a03663cf955459aef88da8789b2238)
+- Fixed `mi_thermald` misconfigured to turn off wrong cores
+  - [3e85c4293b4dd4b67e084e3e40ca70a978c1f2c8](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/3e85c4293b4dd4b67e084e3e40ca70a978c1f2c8)
