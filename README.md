@@ -30,5 +30,5 @@ Here are some highlights of device-specific issues that i have found a fix to on
 - Fixed `mi_thermald` misconfigured to turn off wrong cores
   - [3e85c4293b4dd4b67e084e3e40ca70a978c1f2c8](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/3e85c4293b4dd4b67e084e3e40ca70a978c1f2c8)
 - Suppresed vendor `kmsg` spam/debugging of modules without source
-  - [06af5ac88a95e9ccc2fcd5faacff1f103c356afd](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/06af5ac88a95e9ccc2fcd5faacff1f103c356afd)
+  - [06af5ac88a95e9ccc2fcd5faacff1f103c356afd](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/06af5ac88a95e9ccc2fcd5faacff1f103c356afd) | [3cc1c](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/3cc1c53a2471d42936383a654d2fd0451dc556a9) | [e6036](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/e6036fddf42258ac02c7ed65362ec4ce196e6872) | [57c46](https://github.com/chickendrop89/device_xiaomi_gemstones-kernel/commit/57c46727a3a4d58e1b516bed30ccb0bec944b167)
   
